@@ -6,6 +6,6 @@ set -eu
 : "${HYDRA_CLIENT_ID:?Missing HYDRA_CLIENT_ID}"
 : "${HYDRA_CLIENT_SECRET:?Missing HYDRA_CLIENT_SECRET}"
 
-envsubst < /etc/keto/oathkeeper.yml.tmpl > /etc/keto/oathkeeper.yml
+envsubst < /etc/oathkeeper/oathkeeper.yml.tmpl > /etc/oathkeeper/oathkeeper.yml
 
 exec oathkeeper -c /etc/oathkeeper/oathkeeper.yml serve
