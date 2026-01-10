@@ -1,0 +1,63 @@
+version: v25.4.0
+
+log:
+  level: info
+  format: json
+
+serve:
+  proxy:
+    host: 0.0.0.0
+    port: 4455
+  api:
+    host: 0.0.0.0
+    port: 4456
+
+access_rules:
+  repositories:
+    - file:///etc/oathkeeper/rules
+
+errors:
+  fallback:
+    - json
+  handlers:
+    json:
+      enabled: true
+      config:
+        verbose: true
+
+authenticators:
+  anonymous:
+    enabled: true
+    config:
+      subject: guest
+
+  oauth2_introspection:
+    enabled: false
+    config:
+      introspection_url: ${HYDRA_PUBLIC_URL}/oauth2/introspect
+      scope_strategy: exact
+      cache:
+        enabled: true
+        ttl: 60s
+      pre_authorization:
+        enabled: true
+        client_id: ${HYDRA_CLIENT_ID}
+        client_secret: ${HYDRA_CLIENT_SECRET}
+        scope:
+          - introspect
+        token_url: ${HYDRA_ADMIN_URL}/oauth2/token
+
+authorizers:
+  allow:
+    enabled: true
+  deny:
+    enabled: true
+  keto_engine_acp_ory:
+    enabled: true
+    config:
+      base_url: ${KETO_READ_URL}
+
+mutators:
+  noop:
+    enabled: true
+

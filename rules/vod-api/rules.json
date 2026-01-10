@@ -1,0 +1,38 @@
+[
+  {
+    "id": "business-api__providers__read",
+    "match": {
+      "url": "https://vod-api.dhe.ovh/providers",
+      "methods": [
+        "GET"
+      ]
+    },
+    "upstream": {
+      "url": "http://localhost:4000",
+      "preserve_host": true
+    },
+    "authenticators": [
+      {
+        "handler": "oauth2_introspection"
+      }
+    ],
+    "authorizer": {
+      "handler": "keto_engine_acp_ory",
+      "config": {
+        "flavor": "exact",
+        "required_action": "can_read",
+        "required_resource": "provider:*"
+      }
+    },
+    "mutators": [
+      {
+        "handler": "jwt",
+        "config": {
+          "issuer_url": "https://api.dhe.ovh",
+          "ttl": "15m",
+          "claims": "{ \"sub\": \"{{ .Subject }}\" }"
+        }
+      }
+    ]
+  }
+]
