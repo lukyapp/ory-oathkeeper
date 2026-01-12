@@ -2,13 +2,14 @@
   {
     "id": "vod-api__providers__read",
     "match": {
-      "url": "<https|http>://api\\.dhe\\.ovh/vod-api/providers",
+      "url": "<https|http>://api.dhe.ovh/vod-api/<.*>",
       "methods": [
         "GET"
       ]
     },
     "upstream": {
       "url": "http://vod-api.railway.internal:4000",
+      "strip_path": "/vod-api",
       "preserve_host": true
     },
     "authenticators": [
@@ -29,6 +30,7 @@
         "handler": "id_token",
         "config": {
           "issuer_url": "https://api.dhe.ovh",
+          jwks_url
           "ttl": "15m",
           "claims": "{ \"sub\": \"{{ print .Subject }}\", \"email\": \"{{ print .Extra.email }}\", \"aud\": [\"vod-api\"] }"
         }
