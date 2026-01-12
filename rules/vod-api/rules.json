@@ -1,6 +1,6 @@
 [
   {
-    "id": "business-api__providers__read",
+    "id": "vod-api__providers__read",
     "match": {
       "url": "https://vod-api.dhe.ovh/providers",
       "methods": [
@@ -8,7 +8,7 @@
       ]
     },
     "upstream": {
-      "url": "http://localhost:4000",
+      "url": "http://vod-api.railway.internal:4000",
       "preserve_host": true
     },
     "authenticators": [
@@ -26,11 +26,11 @@
     },
     "mutators": [
       {
-        "handler": "jwt",
+        "handler": "id_token",
         "config": {
           "issuer_url": "https://api.dhe.ovh",
           "ttl": "15m",
-          "claims": "{ \"sub\": \"{{ .Subject }}\" }"
+          "claims": "{ \"sub\": \"{{ print .Subject }}\", \"email\": \"{{ print .Extra.email }}\", \"aud\": [\"vod-api\"] }"
         }
       }
     ]
