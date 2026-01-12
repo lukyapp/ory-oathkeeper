@@ -2,7 +2,7 @@
   {
     "id": "vod-api__providers__read",
     "match": {
-      "url": "https://vod-api.dhe.ovh/providers",
+      "url": "https://api.dhe.ovh/vod-api/providers",
       "methods": [
         "GET"
       ]
