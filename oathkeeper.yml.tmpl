@@ -56,6 +56,8 @@ authorizers:
     enabled: true
     config:
       base_url: ${KETO_READ_URL}
+      required_action: noop
+      required_resource: noop
 
 mutators:
   noop:
