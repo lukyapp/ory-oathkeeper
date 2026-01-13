@@ -50,8 +50,8 @@ authenticators:
   jwt:
     enabled: true
     config:
-      issuer_url: ${HYDRA_PUBLIC_URL}
-      jwks_url: ${HYDRA_PUBLIC_URL}/.well-known/jwks.json
+      jwks_urls:
+        - ${HYDRA_PUBLIC_URL}/.well-known/jwks.json
 
 authorizers:
   allow:
