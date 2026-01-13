@@ -32,7 +32,7 @@ authenticators:
       subject: guest
 
   oauth2_introspection:
-    enabled: false
+    enabled: true
     config:
       introspection_url: ${HYDRA_PUBLIC_URL}/oauth2/introspect
       scope_strategy: exact
@@ -60,6 +60,10 @@ authorizers:
       required_resource: noop
 
 mutators:
-  noop:
+  id_token:
     enabled: true
+    config:
+      issuer_url: https://api.dhe.ovh
+      jwks_url: file:///data/jwks.json
+      ttl: 60s
 
