@@ -47,6 +47,12 @@ authenticators:
           - introspect
         token_url: ${HYDRA_ADMIN_URL}/oauth2/token
 
+  jwt:
+    enabled: true
+    config:
+      issuer_url: ${HYDRA_PUBLIC_URL}
+      jwks_url: ${HYDRA_PUBLIC_URL}/.well-known/jwks.json
+
 authorizers:
   allow:
     enabled: true
