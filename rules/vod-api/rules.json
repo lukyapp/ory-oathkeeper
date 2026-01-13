@@ -29,9 +29,6 @@
       {
         "handler": "id_token",
         "config": {
-          "issuer_url": "https://api.dhe.ovh",
-          jwks_url
-          "ttl": "15m",
           "claims": "{ \"sub\": \"{{ print .Subject }}\", \"email\": \"{{ print .Extra.email }}\", \"aud\": [\"vod-api\"] }"
         }
       }
